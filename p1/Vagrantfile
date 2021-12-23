@@ -15,9 +15,8 @@ WORKER_NODE_IP = '192.168.42.111'
 MEM = 1024
 CPU = 1
 BOX = "centos/8"
-BOX_URL = "https://app.vagrantup.com/centos/boxes/8"
+BOX_URL = "https://app.vagrantup.com/centos/boxes/8/versions/2011.0/providers/virtualbox.box"
 BOX_AUTO_UPDATE = false
-
 
 # disable firewall so we can have direct ssh access without need to copy our ssh public key to the machine 
 # !!! (NOT RECOMMENDED , USE THE SSH KEYS METHOD IN PRODUCTION ENV, THIS IS ONLY FOR SCHOOL PRACTICING PURPOSE ) !!!
@@ -53,7 +52,7 @@ Vagrant.configure("2") do |config|
 
 		master.vm.provider "virtualbox" do |v|
 			v.name = MASTER_NODE_NAME
-			v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+			# v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
 		end
 	end
 
@@ -65,7 +64,7 @@ Vagrant.configure("2") do |config|
 
 		worker.vm.provider "virtualbox" do |v|
 			v.name = WORKER_NODE_NAME
-			v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+			# v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
 		end
 	end
 end
