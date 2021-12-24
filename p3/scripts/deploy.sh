@@ -1,4 +1,4 @@
-# change this depends on ur path containg the config files
+# change this depends on ur path containing the config files
 CONFIG_PATH="/vagrant"
 
 ## [NAMESPACES] : create {argocd, dev} namespaces as required in the subjcet
@@ -35,9 +35,9 @@ kubectl rollout status deployment argocd-dex-server -n argocd
 #                               and let us voluntarily put some restrictions in this project, 
 #                               that will apply to all applications 
 #                               that inside this project: allow only in-cluster deployments in the dev namespace.
-echo "################################################################################"
-echo "[ARGOCD-PROJECT-DEVELOPMENT] : setup project rules..."
-sudo kubectl apply -f $CONFIG_PATH/confs/project.yaml -n argocd
+# echo "################################################################################"
+# echo "[ARGOCD-PROJECT-DEVELOPMENT] : setup project rules..."
+# sudo kubectl apply -f $CONFIG_PATH/confs/project.yaml -n argocd
 
 # [wils-APPLICATION] : setup wils application to fetch its config from our github repo
 echo "################################################################################"
@@ -48,8 +48,11 @@ kubectl apply -n argocd -f $CONFIG_PATH/confs/wils-Application.yaml
 echo "################################################################################"
 echo "[ARGOCD-ADMIN-PASSWORD] : retrieve the password for the admin user of the dashboard"
 echo "YOUR PASSWORD IS ==============>"
+echo "========================================================================>"
+echo "========================================================================>"
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-echo "========================================================================"
+echo "<======================================================================="
+echo "<======================================================================="
 
 sudo kubectl wait --for=condition=Ready pods --all -n argocd
 sleep 20
