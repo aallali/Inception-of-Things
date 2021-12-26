@@ -1,0 +1,53 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# master config
+MASTER_NODE_NAME='aallaliS'
+MASTER_NODE_IP='192.168.42.110'
+
+#agent config
+WORKER_NODE_NAME='aallaliSW'
+WORKER_NODE_IP='192.168.42.111'
+
+# common config
+MEM=1024
+CPU=1
+BOX="centos/8"
+BOX_URL="https://app.vagrantup.com/centos/boxes/8/versions/2011.0/providers/virtualbox.box"
+BOX_AUTO_UPDATE=false
+
+Vagrant.configure("2") do |config|
+
+	config.vm.box="centos/8"
+	config.vm.provider "virtualbox" do |vb|
+	  vb.memory=MEM
+	  vb.cpus=CPU
+	  vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+	  vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+	end
+  
+  # Vm 1 - Master Node 
+	config.vm.define MASTER_NODE_NAME do |master|
+	  master.vm.provider "virtualbox" do |vb|
+		vb.name=MASTER_NODE_NAME
+	  end
+	  master.vm.hostname=MASTER_NODE_NAME
+	  master.vm.network "private_network", ip: MASTER_NODE_IP
+	  master.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/tmp/id_rsa.pub"
+	  master.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/tmp/id_rsa"
+	  master.vm.provision "shell", privileged: true,  path: "scripts/master_node_setup.sh", args: [MASTER_NODE_IP]
+	end
+  
+  # Vm 2 - Worker Node
+	config.vm.define WORKER_NODE_NAME do |worker|
+	  worker.vm.provider "virtualbox" do |vb|
+		vb.name=WORKER_NODE_NAME
+	  end
+	  worker.vm.hostname=WORKER_NODE_NAME
+	  worker.vm.network "private_network", ip: WORKER_NODE_IP
+	  worker.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/tmp/id_rsa.pub"
+	  worker.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/tmp/id_rsa"
+	  worker.vm.provision "shell", privileged: true,  path: "scripts/worker_node_setup.sh", args: [MASTER_NODE_IP, WORKER_NODE_IP]
+	end
+  
+  end
