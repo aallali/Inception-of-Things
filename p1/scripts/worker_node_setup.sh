@@ -1,15 +1,13 @@
 #!/bin/bash
 
 mkdir ~/.ssh
-
-mv /tmp/id_rsa* ~/.ssh/
-
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+cat /tmp/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 400 ~/.ssh/authorized_keys
+chown root:root ~/.ssh/authorized_keys
 
 echo "$1 aallaliS" >> /etc/hosts
 # copy k3s-node-token from the master node so we can connect to the master with that token as agent/worker
-scp -o StrictHostKeyChecking=no root@$1:/var/lib/rancher/k3s/server/token /tmp/token
-Server to connect to, used to join a cluster
+# scp -o StrictHostKeyChecking=no root@$1:/var/lib/rancher/k3s/server/token /tmp/token
 # [K3s] : install k3s as agent ...
 ## agent                : indicate that we are running as agent server
 ## --server value       : (experimental/cluster) Server to connect to, used to join a cluster [$K3S_URL]

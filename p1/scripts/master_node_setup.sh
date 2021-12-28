@@ -2,6 +2,8 @@
 
 mkdir ~/.ssh
 cat /tmp/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 400 ~/.ssh/authorized_keys
+chown root:root ~/.ssh/authorized_keys
 
 # [K3s] : install k3s as master ...
 ## --write-kubeconfig-mode=644  : (client) Write kubeconfig with this mode [$K3S_KUBECONFIG_MODE]
