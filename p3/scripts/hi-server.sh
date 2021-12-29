@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ip address of server
-server_ip=XX.XX.XXX.XXX # change it to the machine ip you will use for deployments
+server_ip="xx.xx.xxx.xxx" # change it to the machine ip you will use for deployments
 username="allali"       # change it to the machine user's name you will use for deployments
 
 # copy public ssh key to the server so we dont need to enter password each time
