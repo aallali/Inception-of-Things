@@ -1,13 +1,13 @@
 
 #!/bin/bash
-echo "alias k='kubectl'" > ~/.bashrc
-echo "alias kpk='kubectl get pods -n kube-system '" > ~/.bashrc
-echo "alias kak='kubectl get all -n kube-system '" > ~/.bashrc
-
+echo "alias k='kubectl'" >> ~/.bashrc
+echo "alias kpk='kubectl get pods -n kube-system '" >> ~/.bashrc
+echo "alias kak='kubectl get all -n kube-system '" >> ~/.bashrc
+echo "alias kdi='kubectl describe ingress -n'" >> ~/.bashrc
+ 
 source .bashrc
-# ./update.sh # i have a script in my machine that contains following update/upgrade commands
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 
 echo "################################################################################"
 echo "[DOCKER] : install docker"
@@ -35,13 +35,19 @@ echo "[KUBE-SYSTEM-ROLLOUT] : wait for kube-system hobs to rolle out."
 # use this command to watch the pods rollout
 # watch kubectl get pods -n kube-system
 # [Ref] : https://serverfault.com/questions/981012/kubernetes-wait-on-pod-job/1013636
+# watch kubectl get pods -n kube-system
+sleep 5
 kubectl get pods -n kube-system 
 kubectl rollout status deployment local-path-provisioner -n kube-system
 kubectl rollout status deployment metrics-server -n kube-system
 kubectl rollout status deployment coredns -n kube-system
 kubectl get pods -n kube-system
 
-sleep 10
+
 echo "############################################################################"
 echo "################# {DOCKER,KUBECTL,K3D} installed succefully ################"
 echo "############################################################################"
+
+watch kubectl get pods -n kube-system
+
+sudo bash scripts/deploy.sh
