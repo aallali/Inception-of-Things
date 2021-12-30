@@ -14,17 +14,25 @@ spec:
       labels:
         app: app3
     spec:
+      # containers:
+      # - name: app3
+      #   image: nginx:1.14.2
+      #   ports:
+      #   - containerPort: 80
+      #   volumeMounts:
+      #   - name: html-volume
+      #     mountPath: /usr/share/nginx/html
+      # volumes:
+      # - name: html-volume
+      #   configMap:
+      #     name: app3-html
       containers:
       - name: app3
-        image: nginx:1.14.2
+        image: paulbouwer/hello-kubernetes:1.10
+        env:
+        - name: MESSAGE
+          value: "Hello from app3."
+        - name: KUBERNETES_NAMESPACE
+          value: "default"
         ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: html-volume
-        configMap:
-          name: app3-html
-
-
+        - containerPort: 8080

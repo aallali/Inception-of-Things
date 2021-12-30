@@ -5,7 +5,7 @@ metadata:
   labels:
     app: app2
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: app2
@@ -16,15 +16,13 @@ spec:
     spec:
       containers:
       - name: app2
-        image: nginx:1.14.2
+        image: paulbouwer/hello-kubernetes:1.10
+        env:
+        - name: MESSAGE
+          value: "Hello from app2"
+        - name: KUBERNETES_NAMESPACE
+          value: "default"
         ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: html-volume
-        configMap:
-          name: app2-html
+        - containerPort: 8080
 
 

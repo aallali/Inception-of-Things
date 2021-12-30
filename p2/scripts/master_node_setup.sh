@@ -31,19 +31,22 @@ kubectl rollout status deployment coredns -n kube-system
 sleep 60
 
 echo "[APP-1] : deploying..."
-/usr/local/bin/kubectl create configmap app1-html --from-file /tmp/confs/k3s/app1/index.html
+# /usr/local/bin/kubectl create configmap app1-html --from-file /tmp/confs/k3s/app1/index.html
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app1/app1.deployment.yaml
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app1/app1.service.yaml
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app1/app1.ingress.yaml
 
 echo "[APP-2] : deploying..."
-/usr/local/bin/kubectl create configmap app2-html --from-file /tmp/confs/k3s/app2/index.html
+# /usr/local/bin/kubectl create configmap app2-html --from-file /tmp/confs/k3s/app2/index.html
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app2/app2.deployment.yaml
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app2/app2.service.yaml
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app2/app2.ingress.yaml
 
 echo "[APP-3] : deploying..."
-/usr/local/bin/kubectl create configmap app3-html --from-file /tmp/confs/k3s/app3/index.html
+# /usr/local/bin/kubectl create configmap app3-html --from-file /tmp/confs/k3s/app3/index.html
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app3/app3.deployment.yaml
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app3/app3.service.yaml
 /usr/local/bin/kubectl apply -n kube-system -f /tmp/confs/k3s/app3/app3.ingress.yaml
+
+sleep 60
+echo "[END] : App1/2/3 deployed succefully"
