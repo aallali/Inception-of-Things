@@ -36,7 +36,7 @@ echo "[KUBE-SYSTEM-ROLLOUT] : wait for kube-system hobs to rolle out."
 # watch kubectl get pods -n kube-system
 # [Ref] : https://serverfault.com/questions/981012/kubernetes-wait-on-pod-job/1013636
 # watch kubectl get pods -n kube-system
-sleep 5
+sleep 10
 kubectl get pods -n kube-system 
 kubectl rollout status deployment local-path-provisioner -n kube-system
 kubectl rollout status deployment metrics-server -n kube-system

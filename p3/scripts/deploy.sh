@@ -51,16 +51,18 @@ echo "<==============================================="
 sudo kubectl wait --for=condition=Ready pods --all -n argocd
 sleep 120 # wait for the app to be deployed by argocd
 echo "[WILL-APP] : test app at http://localhost:8888/"
-curl http://localhost:8888/
-curl http://localhost:8888/
-curl http://localhost:8888/
-curl http://localhost:8888/
-curl http://localhost:8888/
-curl http://localhost:8888/
+
+# ignore this just playing
+curl http://localhost:8888/ && echo "."
+curl http://localhost:8888/ && echo ".."
+curl http://localhost:8888/ && echo "..."
+curl http://localhost:8888/ && echo "...."
+curl http://localhost:8888/ && echo "....."
+curl http://localhost:8888/ && echo "......"
 
 echo ""
 echo "#############################################################################"
 echo "############################### ALL SET !! ##################################"
-echo "########################## ARGOCD : localhost:8080 ##########################"
+echo "########################## ARGOCD : localhost ##########################"
 echo "########################## WIL-APP: localhost:8888 ##########################"
 echo "#############################################################################"
