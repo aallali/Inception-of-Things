@@ -31,6 +31,8 @@ kubectl rollout status deployment argocd-redis -n argocd
 kubectl rollout status deployment argocd-repo-server -n argocd
 kubectl rollout status deployment argocd-dex-server -n argocd
 
+echo "[SLEEP] : lets wait for a minute before proceed before going any further"
+sleep 60
 # [wils-APPLICATION] : setup wils application to fetch its config from our github repo
 echo "################################################################################"
 echo "[wils-APPLICATION] : setup wils application to fetch its config from our github repo"
@@ -47,10 +49,16 @@ echo "<==============================================="
 echo "<==============================================="
 
 sudo kubectl wait --for=condition=Ready pods --all -n argocd
-sleep 60 # wait for the app to be deployed by argocd
+sleep 120 # wait for the app to be deployed by argocd
 echo "[WILL-APP] : test app at http://localhost:8888/"
 curl http://localhost:8888/
+curl http://localhost:8888/
+curl http://localhost:8888/
+curl http://localhost:8888/
+curl http://localhost:8888/
+curl http://localhost:8888/
 
+echo ""
 echo "#############################################################################"
 echo "############################### ALL SET !! ##################################"
 echo "########################## ARGOCD : localhost:8080 ##########################"
