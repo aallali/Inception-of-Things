@@ -1,6 +1,7 @@
 # 42-Inception-of-Things
 This project aims to introduce you to kubernetes from a developer perspective. You will have to set up small clusters and discover the mechanics of continuous integration. At the end of this project you will be able to have a working cluster in docker and have a usable continuous integration for your applications. 
 
+## check (v2/1337) branch, it contains the version compatible with the 1337's IMacs
 ### !!! IGNORE THIS IT WILL BE UPDATED !!!
 ### - commands sheets (ignore it, it will be re-written later in well organized documentation)
 **install vbguest**
